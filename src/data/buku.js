@@ -1,3 +1,10 @@
+export const warnaKategori = {
+  Pemrograman: '#2563eb',
+  'Ilmu Komputer': '#7c3aed',
+  Desain: '#db2777',
+  'Basis Data': '#ea580c',
+}
+
 export const daftarBuku = [
   {
     id: 1,

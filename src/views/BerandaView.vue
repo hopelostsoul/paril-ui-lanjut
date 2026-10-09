@@ -1,36 +1,50 @@
 <script setup>
 import { usePeminjamanStore } from '../stores/peminjaman'
+import { daftarBuku } from '../data/buku'
+import AppIcon from '../components/AppIcon.vue'
 
 const peminjaman = usePeminjamanStore()
+const totalTersedia = daftarBuku.filter((b) => b.tersedia).length
 </script>
 
 <template>
-  <h1>Selamat datang di Perpustakaan Telkom University</h1>
-  <p class="subjudul">
-    Telusuri koleksi buku, pinjam judul yang kamu butuhkan, dan pantau status peminjamanmu di satu tempat.
-  </p>
+  <section class="hero">
+    <h1>Selamat datang di Perpustakaan Kampus</h1>
+    <p>Jelajahi katalog buku, cari judul favoritmu, dan pantau buku yang sedang kamu pinjam &mdash; semua dalam satu tempat.</p>
+  </section>
 
-  <div class="stat-pita">
-    Sedang kamu pinjam <strong>{{ peminjaman.idDipinjam.length }}</strong> buku
+  <div class="stats">
+    <div class="stat">
+      <div class="n">{{ daftarBuku.length }}</div>
+      <div class="l">Total judul buku</div>
+    </div>
+    <div class="stat">
+      <div class="n">{{ totalTersedia }}</div>
+      <div class="l">Buku tersedia</div>
+    </div>
+    <div class="stat">
+      <div class="n">{{ peminjaman.idDipinjam.length }}</div>
+      <div class="l">Sedang kamu pinjam</div>
+    </div>
   </div>
 
-  <div class="aksi-grid">
-    <div class="aksi-kartu">
+  <div class="quick-grid">
+    <router-link class="quick" to="/katalog">
+      <span class="icon-badge"><AppIcon name="book" /></span>
       <h3>Katalog Buku</h3>
-      <p>Jelajahi seluruh koleksi buku yang tersedia di perpustakaan.</p>
-      <router-link class="btn" to="/katalog">Buka katalog</router-link>
-    </div>
+      <p>Lihat semua buku yang tersedia di perpustakaan.</p>
+    </router-link>
 
-    <div class="aksi-kartu">
+    <router-link class="quick" to="/pencarian">
+      <span class="icon-badge"><AppIcon name="search" /></span>
       <h3>Pencarian</h3>
-      <p>Cari buku tertentu berdasarkan judul atau nama penulis.</p>
-      <router-link class="btn" to="/pencarian">Cari buku</router-link>
-    </div>
+      <p>Cari buku berdasarkan judul atau penulis.</p>
+    </router-link>
 
-    <div class="aksi-kartu">
+    <router-link class="quick" to="/peminjaman">
+      <span class="icon-badge"><AppIcon name="clock" /></span>
       <h3>Peminjaman Saya</h3>
-      <p>Lihat daftar buku yang sedang kamu pinjam.</p>
-      <router-link class="btn" to="/peminjaman">Lihat peminjaman</router-link>
-    </div>
+      <p>Pantau buku yang sedang kamu pinjam.</p>
+    </router-link>
   </div>
 </template>
